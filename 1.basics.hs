@@ -1,3 +1,5 @@
+{-
+-}
 sumatorial :: Integer -> Integer
 
 sumatorial 0 = 0
@@ -48,6 +50,9 @@ sumEveryTwo []          = []
 sumEveryTwo (x:[])      = []
 sumEveryTwo (x:(y:ys))  = (x + y) : sumEveryTwo ys
 
+-- Show
+hailstoneLen :: Integer -> Integer
+hailstoneLen n = intListLength (hailstoneSeq n) - 1
 
 main = do
   print (sumatorial 10)
