@@ -52,6 +52,13 @@ brent = Person "Brent" 25 Cabbage
 liz = Person "Liz" 28 Queen
 tris = Person "Tristian" 28 King
 
+showName :: Person -> String
+showName p@(Person n _ _) = "The name field of " ++ show p ++ " is " ++ n
+
+checkFav :: Person -> String
+checkFav (Person n _ SealingWax) = n ++ ", my favourite kind of person"
+checkFav (Person n _ _) = n ++ ", your favourite thing is lame"
+
 main = do
   -- Small 1
   print (isSmall Cabbage)
@@ -68,3 +75,7 @@ main = do
 
   print liz
   print ("Liz Age", getAge liz)
+
+  putStrLn ("showName: " ++ showName liz)
+  putStrLn ("checkFav (cool): " ++ checkFav liz)
+  putStrLn ("checkFav (lame): " ++ checkFav tris)
