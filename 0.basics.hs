@@ -33,10 +33,21 @@ a = 1 : []
 b = 3 : (1 : [])
 c = [2,3,4] == 2 : 3 : 4 : []
 
-
 hailstoneSeq :: Integer -> [Integer]
 hailstoneSeq 1 = [1]
 hailstoneSeq n = n : hailstoneSeq (hailstone n)
+
+
+-- Functions on lists
+intListLength :: [Integer] -> Integer
+intListLength []        = 0
+intListLength (x:xs)    = 1 + intListLength xs
+
+sumEveryTwo :: [Integer] -> [Integer]
+sumEveryTwo []          = []
+sumEveryTwo (x:[])      = []
+sumEveryTwo (x:(y:ys))  = (x + y) : sumEveryTwo ys
+
 
 main = do
   print (sumatorial 10)
@@ -44,4 +55,5 @@ main = do
   print [foo (-3), foo 0, foo 1, foo 36, foo 38]
   print (sumPair (21, 21))
   print (hailstoneSeq 5)
-
+  print (intListLength [1,2,3,4,5])
+  print (sumEveryTwo [1,2,3,4,4,5,6,7,8])
