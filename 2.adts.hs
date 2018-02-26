@@ -42,6 +42,11 @@ failureToZero :: FailableDouble -> Double
 failureToZero Failure = 0
 failureToZero (OK d) = d
 
+failureToZero' :: FailableDouble -> Double
+failureToZero' x = case x of
+                     Failure  -> 0
+                     OK d     -> d
+
 data Person = Person String Int Thing
   deriving Show
 
@@ -59,6 +64,26 @@ checkFav :: Person -> String
 checkFav (Person n _ SealingWax) = n ++ ", my favourite kind of person"
 checkFav (Person n _ _) = n ++ ", your favourite thing is lame"
 
+caseExpr :: String
+caseExpr = case "Hello" of
+  []      -> show 3
+  ('H':s) -> show $ length s
+  _       -> show 7
+
+-- Recursive Data types
+data IntList = Empty | Cons Int IntList
+
+intListProd :: IntList -> Int
+intListProd Empty         = 1
+intListProd (Cons x xs)   = x * intListProd xs
+
+data Tree = Leaf Char
+          | Node Tree Int Tree
+  deriving Show
+
+t :: Tree
+t = Node (Leaf 'x') 1 (Node (Leaf 'y') 2 (Leaf 'z'))
+
 main = do
   -- Small 1
   print (isSmall Cabbage)
@@ -72,6 +97,7 @@ main = do
 
   print ("safeDiv", safeDiv 2 0, safeDiv 3 4)
   print ("failureToZero", failureToZero Failure, failureToZero (OK 3.141516))
+  print ("failureToZero'", failureToZero' Failure, failureToZero' (OK 3.141516))
 
   print liz
   print ("Liz Age", getAge liz)
@@ -79,3 +105,8 @@ main = do
   putStrLn ("showName: " ++ showName liz)
   putStrLn ("checkFav (cool): " ++ checkFav liz)
   putStrLn ("checkFav (lame): " ++ checkFav tris)
+
+  putStrLn ("caseExpr: " ++ caseExpr)
+  print ("intListProd", intListProd (Cons 3 (Cons 2 (Cons 4 Empty))))
+  print ("Tree", show t)
+
