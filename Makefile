@@ -1,7 +1,7 @@
-.PHONY: clean 0.basics
+.PHONY: clean 1.basics
 
 0.basics:
-	ghc 0.basics.hs
+	ghc 1.basics.hs
 
 clean:
-	rm 0.basics
+	rm 1.basics
